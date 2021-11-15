@@ -1,0 +1,72 @@
+[
+    {
+        "inputs":
+        [
+            {
+                "internalType": "address[]",
+                "name": "recipients",
+                "type": "address[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "values",
+                "type": "uint256[]"
+            }
+        ],
+        "name": "scatterEther",
+        "outputs":
+        [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs":
+        [
+            {
+                "internalType": "contract IERC20",
+                "name": "token",
+                "type": "address"
+            },
+            {
+                "internalType": "address[]",
+                "name": "recipients",
+                "type": "address[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "values",
+                "type": "uint256[]"
+            }
+        ],
+        "name": "scatterToken",
+        "outputs":
+        [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs":
+        [
+            {
+                "internalType": "contract IERC20",
+                "name": "token",
+                "type": "address"
+            },
+            {
+                "internalType": "address[]",
+                "name": "recipients",
+                "type": "address[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "values",
+                "type": "uint256[]"
+            }
+        ],
+        "name": "scatterTokenSimple",
+        "outputs":
+        [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]
