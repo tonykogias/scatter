@@ -3,11 +3,13 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import { useWeb3React } from '@web3-react/core';
 
 function NetworkSelector() {
 
-	const [network, setNetwork] = React.useState("ddddd");
-  const chainId = useRef("");
+  const { chainId } = useWeb3React()
+  const [network, setNetwork] = React.useState(chainId === 10 ? "OE" : "OK");
+  const chain = useRef("");
   const chainName = useRef("");
   const rpcUrl = useRef("");
 
@@ -15,12 +17,12 @@ function NetworkSelector() {
 	    setNetwork(event.target.value);
       switch(event.target.value) {
         case "OE":
-          chainId.current = "0xA";
+          chain.current = "0xA";
           chainName.current = "Optimistic Ethereum";
           rpcUrl.current = "https://mainnet.optimism.io";
           break;
         case "OK":
-          chainId.current = "0x45";
+          chain.current = "0x45";
           chainName.current = "Optimistic Ethereum (Kovan)";
           rpcUrl.current = "https://kovan.optimism.io/";
           break;
@@ -28,9 +30,13 @@ function NetworkSelector() {
       try {
         await window.ethereum.request({
           method: 'wallet_switchEthereumChain',
-          params: [{ chainId: chainId.current }],
+          params: [{ chainId: chain.current }],
         });
       } catch (error) {
+        if (error.code === 4001) {
+          console.log("User rejected request.");
+        }
+
         if (error.code === 4902) {
           console.log("rpc: ", rpcUrl.current)
           try {
@@ -48,7 +54,6 @@ function NetworkSelector() {
             console.error(addError);
           }
         }
-        console.error(error);
       }
 	};
 

@@ -14,6 +14,7 @@ function AppContainer() {
   const { active } = useWeb3React();
   const [isEth, setIsEth] = React.useState(true);
   const [addresses, setAddresses] = React.useState([]);
+  const [tokenAddress, setTokenAddress] = React.useState("");
 
   return (
     <Page>
@@ -22,10 +23,10 @@ function AppContainer() {
       { active ?
           <div>
             <Tabs setIsEth={setIsEth} isEth={isEth} setAddresses={setAddresses}/>
-            <TransactionInput isEth={isEth} setAddresses={setAddresses} addresses={addresses} />
+            <TransactionInput isEth={isEth} setAddresses={setAddresses} addresses={addresses} tokenAddress={tokenAddress} setTokenAddress={setTokenAddress} />
             { addresses.length > 0 ?
               <div>
-                <TransactionDetails addresses={addresses} />
+                <TransactionDetails isEth={isEth} addresses={addresses} tokenAddress={tokenAddress}/>
               </div>
             :
               <div></div>

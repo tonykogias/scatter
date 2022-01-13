@@ -21,7 +21,7 @@ function Navbar() {
 
   async function connect() {
     try {
-      await activate(injected)
+      await activate(injected);
       if(error instanceof UnsupportedChainIdError){
         toast.error('Network not supported.', {
           position: "bottom-center",
@@ -47,10 +47,9 @@ function Navbar() {
         });
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   }
-  
 
   return (
     <>

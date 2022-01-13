@@ -12,13 +12,12 @@ import {
  
 } from './TransactionInput.elements';
 
-function TransactionInput({isEth, setAddresses, addresses}) {  
+function TransactionInput({isEth, setAddresses, addresses, tokenAddress, setTokenAddress}) {  
 
   const { account } = useWeb3React();
   const [balance, setBalance] = React.useState(0);
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
   const token = React.useRef({});
-  const [tokenAddress, setTokenAddress] = React.useState("");
+  // const [tokenAddress, setTokenAddress] = React.useState("");
   const [tokenBalance, setTokenBalance] = React.useState(0);
   const [tokenDecimals, setTokenDecimals] = React.useState(0);
   const [tokenName, setTokenName] = React.useState("");
@@ -107,17 +106,19 @@ function TransactionInput({isEth, setAddresses, addresses}) {
         theme: "colored"
       });
       setTokenName("");
+      setAddresses("");
       return;
     }
     
     try{
-      const erc20 = new ethers.Contract(tokenAddress, erc20abi, provider);
+      const erc20 = new web3.eth.Contract(erc20abi, tokenAddress);
+      console.log(erc20);
       token.current = erc20;
-      const balance = await token.current.balanceOf(account);
-      setTokenBalance(balance.toString());
-      setTokenName(await token.current.name());
-      setTokenSymbol(await token.current.symbol());
-      setTokenDecimals(await token.current.decimals());
+      const balance = await token.current.methods.balanceOf(account).call();
+      setTokenBalance(web3.utils.fromWei(balance.toString()));
+      setTokenName(await token.current.methods.name().call());
+      setTokenSymbol(await token.current.methods.symbol().call());
+      setTokenDecimals(await token.current.methods.decimals().call());
     }catch(error){
       console.log("Token not erc20 compatible.", error);
       toast.error('Unsupported token.', {
@@ -131,6 +132,7 @@ function TransactionInput({isEth, setAddresses, addresses}) {
         theme: "colored"
       });
       setTokenName("");
+      setAddresses("");
       return;
     }
   }
