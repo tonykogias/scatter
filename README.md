@@ -4,7 +4,7 @@ Distribute ether or tokens to multiple addresses on Optimistic Ethereum or Optim
 
 Contract Address: [0xFf2Cb5180f174A0B18edAa4c68f8D8A345824643](https://kovan-optimistic.etherscan.io/address/0xFf2Cb5180f174A0B18edAa4c68f8D8A345824643)
 
-This project was made for fun, you find a demo version [here](https://optimism-scatter.netlify.app/)
+This project was made for fun, you can find a demo version [here](https://optimism-scatter.netlify.app/)
 
 ## Disclaimer
 
